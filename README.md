@@ -33,11 +33,12 @@ Run `pip install -r .\setup.txt` to build all packages inside the setup.txt
 Run `py manage.py startapp blog` to create new app in your project
 ***
 ### view
+
 ```pycon
 from django.shortcuts import render
 
 def index(request):
-    return render(request, 'blog/index.html')
+    return render(request, 'blog/blog/templates/index.html')
 ```
 Note: Before we can render the view, we should add the app name into `settings > [INSTALLED_APPS]` to override its templates directory.
 ```pycon
@@ -47,10 +48,12 @@ INSTALLED_APPS = [
     ...,
 ]
 ```
+Note: You can find and edit the app name in `apps.py`
 ***
 ### url
 
 Step 1: Add the group url for your app in `project > urls.py`
+<br>(In this case, our project is `blog`)
 ```pycon
 ...
 from django.urls import include, path
