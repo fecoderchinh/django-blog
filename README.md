@@ -111,6 +111,8 @@ class Category(models.Model):
         return self.name
 ```
 
-_**Step 3:**_ Run `py .\manage.py migrate` to add the django's models in your database.
+_**Step 3:**_ 
+- Run `py .\manage.py makemigrations` if you are updating current models.
+- Run `py .\manage.py migrate` to add the django's models in your database.
 
 **_Step 4:_** Run `py .\manage.py createsuperuser` to create admin user so that we can manage our admin site.
