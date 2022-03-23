@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
+from parler.models import TranslatableModel, TranslatedFields
+
 
 class PostAuthor(models.Model):
     """
@@ -17,6 +19,8 @@ class PostAuthor(models.Model):
 
     class Meta:
         ordering = ["user", "bio"]
+        verbose_name = _('Post Author')
+        verbose_name_plural = _('Post Authors')
 
     def get_absolute_url(self):
         """
@@ -31,13 +35,17 @@ class PostAuthor(models.Model):
         return self.user.username
 
 
-class Category(models.Model):
-    name = models.CharField(max_length=255)
+class Category(TranslatableModel):
+    translations = TranslatedFields(
+        name=models.CharField(max_length=255),
+        description=models.TextField()
+    )
+
     slug = models.SlugField(max_length=40, unique=True)
-    description = models.TextField()
 
     class Meta:
-        verbose_name_plural = "Categories"
+        verbose_name = _('Category')
+        verbose_name_plural = _('Categories')
 
     def get_absolute_url(self):
         """
@@ -52,11 +60,14 @@ class Category(models.Model):
         return self.name
 
 
-class Post(models.Model):
+class Post(TranslatableModel):
     """
     Model representing a blog post.
     """
-    name = models.CharField(max_length=200)
+    translations = TranslatedFields(
+        name=models.CharField(max_length=200),
+        description=models.TextField(max_length=2000, help_text=_("Enter your post content text here."))
+    )
     slug = models.SlugField(max_length=40, unique=True)
     author = models.ForeignKey(PostAuthor, on_delete=models.SET_NULL, null=True)
     # Foreign Key used because Post can only have one author/User, but bloggers can have multiple Posts.
@@ -66,13 +77,14 @@ class Post(models.Model):
     # FYI: ManyToManyField.through
     # Read more at https://docs.djangoproject.com/en/4.0/ref/models/fields/#django.db.models.ManyToManyField.through
 
-    description = models.TextField(max_length=2000, help_text=_("Enter your post content text here."))
     post_date = models.DateField(default=date.today())
 
     class Meta:
         ordering = ['-post_date']
         # The negative sign in front of "-post_date" indicates descending order.
         # Read more at https://docs.djangoproject.com/en/4.0/ref/models/querysets/#order-by-fields
+        verbose_name = _('Post')
+        verbose_name_plural = _('Posts')
 
     def get_absolute_url(self):
         """
@@ -106,6 +118,8 @@ class PostComment(models.Model):
 
     class Meta:
         ordering = ['post_date']
+        verbose_name = _('Post Comment')
+        verbose_name_plural = _('Post Comments')
 
     def __str__(self):
         """

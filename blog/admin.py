@@ -6,7 +6,9 @@ from .models import (
     PostComment,
 )
 
-admin.site.register(Category)
+from parler.admin import TranslatableAdmin
+
+admin.site.register(Category, TranslatableAdmin)
 admin.site.register(PostAuthor)
 admin.site.register(PostComment)
 
@@ -20,7 +22,7 @@ class PostCommentsInline(admin.TabularInline):
 
 
 @admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(TranslatableAdmin):
     """
     Administration objects for Blog models.
     Defines:

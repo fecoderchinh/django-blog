@@ -1,4 +1,6 @@
 pymysql
 mysqlclient
 django-crispy-forms
+django-parler
+djangorestframework
 django-rosetta
