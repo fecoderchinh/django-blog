@@ -21,6 +21,7 @@ class PostAuthor(models.Model):
         ordering = ["user", "bio"]
         verbose_name = _('Post Author')
         verbose_name_plural = _('Post Authors')
+        db_table = 'authors'
 
     def get_absolute_url(self):
         """
@@ -46,6 +47,7 @@ class Category(TranslatableModel):
     class Meta:
         verbose_name = _('Category')
         verbose_name_plural = _('Categories')
+        db_table = 'categories'
 
     def get_absolute_url(self):
         """
@@ -80,6 +82,7 @@ class Post(TranslatableModel):
     post_date = models.DateField(default=date.today())
 
     class Meta:
+        db_table = 'posts'
         ordering = ['-post_date']
         # The negative sign in front of "-post_date" indicates descending order.
         # Read more at https://docs.djangoproject.com/en/4.0/ref/models/querysets/#order-by-fields
@@ -117,6 +120,7 @@ class PostComment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
     class Meta:
+        db_table = 'post_comments'
         ordering = ['post_date']
         verbose_name = _('Post Comment')
         verbose_name_plural = _('Post Comments')
