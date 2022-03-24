@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-23 14:52+0700\n"
-"PO-Revision-Date: 2022-03-23 15:01+0000\n"
+"POT-Creation-Date: 2022-03-24 09:14+0700\n"
+"PO-Revision-Date: 2022-03-24 09:15+0000\n"
 "Last-Translator:   <admin@domain.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -31,39 +31,60 @@ msgstr "Tác giả"
 msgid "Post Authors"
 msgstr "Các tác giả"
 
-#: .\blog\models.py:47
+#: .\blog\models.py:48
 msgid "Category"
 msgstr "Danh mục"
 
-#: .\blog\models.py:48
+#: .\blog\models.py:49
 msgid "Categories"
 msgstr "Các danh mục"
 
-#: .\blog\models.py:69
+#: .\blog\models.py:71
 msgid "Enter your post content text here."
 msgstr "Điền nội dung ở đây."
 
-#: .\blog\models.py:86
+#: .\blog\models.py:89
 msgid "Post"
 msgstr "Bài viết"
 
-#: .\blog\models.py:87
+#: .\blog\models.py:90
 msgid "Posts"
 msgstr "Các bài viết"
 
-#: .\blog\models.py:111
+#: .\blog\models.py:114
 msgid "Enter comment about blog here."
 msgstr "Điền bình luận vào đây."
 
-#: .\blog\models.py:121
+#: .\blog\models.py:125
 msgid "Post Comment"
 msgstr "Bình luận bài viết"
 
-#: .\blog\models.py:122
+#: .\blog\models.py:126
 msgid "Post Comments"
 msgstr "Các bình luận bài viết"
 
+#: .\blog\templates\base.html:26
+msgid "Language"
+msgstr "Ngôn ngữ"
+
+#: .\blog\templates\base.html:40
+msgid "Hi"
+msgstr "Chào"
+
+#: .\blog\templates\base.html:41 .\blog\templates\base.html:45
+msgid "Log In"
+msgstr "Đăng nhập"
+
+#: .\blog\templates\base.html:42
+msgid "Reset Password"
+msgstr "Đặt lại mật khẩu"
+
+#: .\blog\templates\base.html:44
+msgid "You are not logged in"
+msgstr "Bạn chưa đăng nhập"
+
 #: .\djangoBlog\settings.py:143
+#, fuzzy
 msgid "English"
 msgstr "Tiếng Anh"
 

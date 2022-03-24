@@ -24,6 +24,6 @@ urlpatterns = i18n_patterns(
 
     path(r'ua/', include("django.contrib.auth.urls")),
     path(r'ua/', include("django.contrib.auth.urls")),
-    path(r'favicon\.ico', RedirectView.as_view(url='/static/favicon.ico')),
+    path(r'favicon\.ico', RedirectView.as_view(url='/static/favicon/favicon-16.png')),
     path(r'rosetta/', include('rosetta.urls')),
 )

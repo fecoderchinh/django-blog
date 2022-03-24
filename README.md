@@ -218,5 +218,5 @@ locale
 
 #### That's it, from now we can open the `.po` file and translate messages
 
-#### We prefer to go to `http://localhost/rosetta` and choose the language that we want to translate
+#### We prefer to go to `http://127.0.0.1:8000/rosetta` and choose the language that we want to translate
 ***

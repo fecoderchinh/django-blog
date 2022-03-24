@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-23 14:52+0700\n"
+"POT-Creation-Date: 2022-03-24 09:14+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,36 +30,56 @@ msgstr ""
 msgid "Post Authors"
 msgstr ""
 
-#: .\blog\models.py:47
+#: .\blog\models.py:48
 msgid "Category"
 msgstr ""
 
-#: .\blog\models.py:48
+#: .\blog\models.py:49
 msgid "Categories"
 msgstr ""
 
-#: .\blog\models.py:69
+#: .\blog\models.py:71
 msgid "Enter your post content text here."
 msgstr ""
 
-#: .\blog\models.py:86
+#: .\blog\models.py:89
 msgid "Post"
 msgstr ""
 
-#: .\blog\models.py:87
+#: .\blog\models.py:90
 msgid "Posts"
 msgstr ""
 
-#: .\blog\models.py:111
+#: .\blog\models.py:114
 msgid "Enter comment about blog here."
 msgstr ""
 
-#: .\blog\models.py:121
+#: .\blog\models.py:125
 msgid "Post Comment"
 msgstr ""
 
-#: .\blog\models.py:122
+#: .\blog\models.py:126
 msgid "Post Comments"
+msgstr ""
+
+#: .\blog\templates\base.html:26
+msgid "Language"
+msgstr ""
+
+#: .\blog\templates\base.html:40
+msgid "Hi"
+msgstr ""
+
+#: .\blog\templates\base.html:41 .\blog\templates\base.html:45
+msgid "Log In"
+msgstr ""
+
+#: .\blog\templates\base.html:42
+msgid "Reset Password"
+msgstr ""
+
+#: .\blog\templates\base.html:44
+msgid "You are not logged in"
 msgstr ""
 
 #: .\djangoBlog\settings.py:143
