@@ -4,3 +4,4 @@ django-crispy-forms
 django-parler
 djangorestframework
 django-rosetta
+django-sass

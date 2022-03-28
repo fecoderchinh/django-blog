@@ -24,9 +24,26 @@ For this project, we have to add the below packages:
 pymysql
 mysqlclient
 django-crispy-forms
+django-parler
+djangorestframework
 django-rosetta
+django-sass
 ```
 Run `pip install -r .\setup.txt` to build all packages inside the setup.txt
+
+And don't forget to add these packages in your `settings.py`
+
+```pycon
+INSTALLED_APPS = [
+    ...,
+    'parler',
+    'crispy_forms',
+    'rest_framework',
+    'rosetta',
+    'django_sass',
+    ...,
+]
+```
 
 ---
 ## Tutorials

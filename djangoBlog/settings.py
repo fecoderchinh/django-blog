@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'rest_framework',
     'rosetta',
+    'django_sass',
 ]
 
 MIDDLEWARE = [
@@ -165,3 +166,8 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
 LOGIN_URL = "/ua/login"
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    BASE_DIR / "blog/static",
+]

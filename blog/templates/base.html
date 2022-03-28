@@ -38,11 +38,11 @@
 
             {% if user.is_authenticated %}
                 {% translate 'Hi' %} {{ user.username }}!
-                <p><a href="{% url 'logout' %}">{% translate 'Log In' %}</a></p>
+                <p><a href="{% url 'logout' %}">{% translate 'Logout' %}</a></p>
                 <p><a href="{% url 'password_reset' %}">{% translate 'Reset Password' %}</a></p>
             {% else %}
                 <p>{% translate 'You are not logged in' %}</p>
-                <a href="{% url 'login' %}">{% translate 'Log In' %}</a>
+                <a href="{% url 'login' %}">{% translate 'Login' %}</a>
             {% endif %}
 
             {% block body %}
