@@ -45,6 +45,8 @@ INSTALLED_APPS = [
 ]
 ```
 
+Run `py .\manage.py collectstatic` to collect static files from each of your applications (and any other places you specify) into a single location that can easily be served in production.
+
 ---
 ## Tutorials
 #### Writing a first view

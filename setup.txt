@@ -5,3 +5,4 @@ django-parler
 djangorestframework
 django-rosetta
 django-sass
+django-editorjs-fields

@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rosetta',
     'django_sass',
+    'django_editorjs_fields',
 ]
 
 MIDDLEWARE = [
@@ -167,7 +168,31 @@ LOGOUT_REDIRECT_URL = "/"
 
 LOGIN_URL = "/ua/login"
 
+# All settings common to all environments
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "/media/"
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
     BASE_DIR / "blog/static",
 ]
+
+EDITORJS_VERSION = '2.22.3'
+
+EDITORJS_DEFAULT_PLUGINS = (
+    '@editorjs/paragraph',
+    '@editorjs/image',
+    '@editorjs/header',
+    '@editorjs/list',
+    '@editorjs/checklist',
+    '@editorjs/quote',
+    '@editorjs/raw',
+    '@editorjs/code',
+    '@editorjs/inline-code',
+    '@editorjs/embed',
+    '@editorjs/delimiter',
+    '@editorjs/warning',
+    '@editorjs/link',
+    '@editorjs/marker',
+    '@editorjs/table',
+)

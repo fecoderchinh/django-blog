@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
 from django.conf.urls.i18n import i18n_patterns
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
@@ -26,4 +28,6 @@ urlpatterns = i18n_patterns(
     path(r'ua/', include("django.contrib.auth.urls")),
     path(r'favicon\.ico', RedirectView.as_view(url='/static/favicon/favicon-16.png')),
     path(r'rosetta/', include('rosetta.urls')),
-)
+
+    path('editorjs/', include('django_editorjs_fields.urls')),
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
