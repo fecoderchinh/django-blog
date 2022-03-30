@@ -7,4 +7,5 @@ app_name = 'main'
 urlpatterns = [
     path(r'favicon\.ico', RedirectView.as_view(url='/static/favicon.ico')),
     path(r'', views.index, name='index'),
+    path(r'blog/', views.PostList.as_view(), name='blog-list'),
 ]
