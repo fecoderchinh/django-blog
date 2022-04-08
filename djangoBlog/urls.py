@@ -21,7 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = i18n_patterns(
-    path('admin/', admin.site.urls),
+    path('dashboard/', admin.site.urls),
     path('', include('blog.urls')),
 
     path(r'ua/', include("django.contrib.auth.urls")),

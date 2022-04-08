@@ -1,0 +1,36 @@
+//div.inline-group { list-style-type: none; margin: 0; padding: 0; width: 60%;
+//  li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; height: 1.5em; }
+//}
+//html>body .inline-group li { height: 1.5em; line-height: 1.2em; }
+.ui-state-highlight { height: 1.5em; line-height: 1.2em; }
+.ui-accordion .ui-accordion-content {
+  width: auto;
+}
+fieldset.module {
+  > h2 {
+    margin-bottom: 15px;
+  }
+}
+.sub-group {
+  width: auto;
+  padding: 5px 0 5px 30px;
+  > .inline-related {
+    :last-child {
+      .sub-group {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
+}
+
+.inline-related > h3 .delete {
+  position: relative;
+  cursor: pointer;
+  &:before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+  }
+}

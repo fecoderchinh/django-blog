@@ -6,3 +6,4 @@ djangorestframework
 django-rosetta
 django-sass
 django-editorjs-fields
+Pillow

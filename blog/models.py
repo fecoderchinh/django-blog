@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
+from django.core import validators
+
 from parler.models import TranslatableModel, TranslatedFields
 
 from django_editorjs_fields import EditorJsJSONField
@@ -152,3 +154,99 @@ class PostComment(models.Model):
         else:
             title_string = self.description
         return title_string
+
+
+class CustomText(models.Model):
+    name = models.SlugField()
+    plain_text = models.TextField("Plain/Markdown Text", blank=True)
+    html_text = models.TextField("HTML Text", blank=True)
+    auto_render = models.BooleanField("Render to HTML using Markdown (on save)", default=True)
+
+    class Meta:
+        db_table = 'site_description'
+        verbose_name = _('Description')
+        verbose_name_plural = _('Descriptions')
+
+
+class CustomImage(models.Model):
+    name = models.SlugField()
+    description = models.TextField("Description", null=True, blank=True)
+    image = models.ImageField("Custom Image", upload_to="uploads/images/", null=True, blank=True)
+
+    class Meta:
+        db_table = 'site_identity'
+        verbose_name = _('Image')
+        verbose_name_plural = _('Images')
+
+
+class Menu(models.Model):
+    name = models.CharField(max_length=100)
+
+    class Meta:
+        db_table = 'menu'
+        verbose_name = _('Menu')
+        verbose_name_plural = _('Menus')
+
+    def __unicode__(self):
+        return self.name
+
+    def __str__(self):
+        """
+        String for representing the Model object.
+        """
+        return self.name
+
+
+class MenuItem(models.Model):
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    url = models.CharField(max_length=100)
+    order = models.CharField(blank=True, null=True, max_length=10)
+    parent = models.ForeignKey('self', blank=True, null=True, related_name='child', on_delete=models.CASCADE)
+
+    class Admin:
+        list_display = ('name', '_parents_repr')
+
+    def __str__(self):
+        p_list = self._recurse_for_parents(self)
+        p_list.append(self.name)
+        return self.get_separator().join(p_list)
+
+    def get_absolute_url(self):
+        return self.url
+
+    def _recurse_for_parents(self, cat_obj):
+        p_list = []
+        if cat_obj.parent_id:
+            p = cat_obj.parent
+            p_list.append(p.name)
+            more = self._recurse_for_parents(p)
+            p_list.extend(more)
+        if cat_obj == self and p_list:
+            p_list.reverse()
+        return p_list
+
+    def get_separator(self):
+        return ' :: '
+
+    def _parents_repr(self):
+        p_list = self._recurse_for_parents(self)
+        return self.get_separator().join(p_list)
+
+    _parents_repr.short_description = "Tag parents"
+
+    def save(self):
+        p_list = self._recurse_for_parents(self)
+        if self.name in p_list:
+
+            raise validators.ValidationError("You must not save a category in itself!")
+        super(MenuItem, self).save()
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        ordering = ('order',)
+        db_table = 'menu_item'
+        verbose_name = _('Item')
+        verbose_name_plural = _('Items')

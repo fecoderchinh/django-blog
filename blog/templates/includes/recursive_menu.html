@@ -1,0 +1,12 @@
+<li class="nav-item{% if item.child.all %} dropdown{% endif %}{% if forloop.counter == forloop.parentloop.counter %} dropend{% endif %}">
+<a href="{{ item.url }}" class="nav-link{% if forloop.counter == forloop.parentloop.counter %} dropdown-item{% endif %}{% if item.child.all %} dropdown-toggle{% endif %}" {% if item.child.all %}data-bs-toggle="dropdown" data-bs-auto-close="outside"{% endif %}>{{ item.name }}</a>
+    {% if item.child.all %}
+        <ul class="dropdown-menu shadow">
+            {% for child in item.child.all %}
+                {%with item=child template_name="includes/recursive_menu.html" %}
+                   {%include template_name%}
+                {%endwith%}
+            {% endfor %}
+        </ul>
+    {% endif %}
+</li>
