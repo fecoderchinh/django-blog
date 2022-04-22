@@ -37,8 +37,13 @@ class PostAdmin(TranslatableAdmin):
      - orders fields in detail view (fields), grouping the date fields horizontally
      - adds inline addition of blog comments in blog view (inlines)
     """
-    list_display = ('name', 'slug', 'author', 'post_date')
+    list_display = ('name', 'slug', 'post_date')
+    exclude = ['author', ]
     inlines = [PostCommentsInline]
+
+    def save_model(self, request, obj, form, change):
+        obj.author = PostAuthor.objects.get(user=request.user)
+        super().save_model(request, obj, form, change)
 
 
 class MenuForm(forms.ModelForm):
