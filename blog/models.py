@@ -73,21 +73,23 @@ class Post(TranslatableModel):
     translations = TranslatedFields(
         name=models.CharField(max_length=200),
         # description=models.TextField(max_length=2000, help_text=_("Enter your post content text here.")),
-        description=EditorJsJSONField(readOnly=False, autofocus=True, i18n={
-            'messages': {
-                'blockTunes': {
-                    "delete": {
-                        "Delete": _('Delete')
-                    },
-                    "moveUp": {
-                        "Move up": _('Move up')
-                    },
-                    "moveDown": {
-                        "Move down": _('Move down')
+        description=EditorJsJSONField(readOnly=False, autofocus=True,
+            i18n={
+                'messages': {
+                    'blockTunes': {
+                        "delete": {
+                            "Delete": _('Delete')
+                        },
+                        "moveUp": {
+                            "Move up": _('Move up')
+                        },
+                        "moveDown": {
+                            "Move down": _('Move down')
+                        }
                     }
-                }
+                },
             },
-        }),
+        ),
     )
     slug = models.SlugField(max_length=40, unique=True)
     author = models.ForeignKey(PostAuthor, on_delete=models.SET_NULL, null=True)

@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
+
+from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -134,6 +136,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -180,7 +183,7 @@ STATICFILES_DIRS = [
 EDITORJS_VERSION = '2.22.3'
 
 EDITORJS_DEFAULT_PLUGINS = (
-    '@editorjs/paragraph',
+    'editorjs-paragraph-with-alignment@3.x',
     '@editorjs/image',
     '@editorjs/header',
     '@editorjs/list',
@@ -195,4 +198,58 @@ EDITORJS_DEFAULT_PLUGINS = (
     '@editorjs/link',
     '@editorjs/marker',
     '@editorjs/table',
+    '@vtchinh/gallery-editorjs@1.1.5', # forked from mr8bit/carousel-editorjs
 )
+
+EDITORJS_DEFAULT_CONFIG_TOOLS = {
+    'paragraph': {
+      'class': 'Paragraph',
+      'inlineToolbar': True,
+    },
+    'Image': {
+        'class': 'ImageTool',
+        'inlineToolbar': True,
+        "config": {
+            "endpoints": {
+                "byFile": reverse_lazy('editorjs_image_upload'),
+                "byUrl": reverse_lazy('editorjs_image_by_url')
+            }
+        },
+    },
+    'Header': {
+        'class': 'Header',
+        'inlineToolbar': True,
+        'config': {
+            'placeholder': 'Enter a header',
+            'levels': [2, 3, 4],
+            'defaultLevel': 2,
+        }
+    },
+    'Checklist': {'class': 'Checklist', 'inlineToolbar': True},
+    'List': {'class': 'List', 'inlineToolbar': True},
+    'Quote': {'class': 'Quote', 'inlineToolbar': True},
+    'Raw': {'class': 'RawTool'},
+    'Code': {'class': 'CodeTool'},
+    'InlineCode': {'class': 'InlineCode'},
+    'Embed': {'class': 'Embed'},
+    'Delimiter': {'class': 'Delimiter'},
+    'Warning': {'class': 'Warning', 'inlineToolbar': True},
+    'LinkTool': {
+        'class': 'LinkTool',
+        'config': {
+            'endpoint': reverse_lazy('editorjs_linktool'),
+        }
+    },
+    'Marker': {'class': 'Marker', 'inlineToolbar': True},
+    'Table': {'class': 'Table', 'inlineToolbar': True},
+    'carousel': {
+        'class': 'Carousel',
+        'inlineToolbar': True,
+        'config': {
+            "endpoints": {
+                "byFile": reverse_lazy('editorjs_image_upload'),
+                "byUrl": reverse_lazy('editorjs_image_by_url')
+            }
+        },
+    }
+}

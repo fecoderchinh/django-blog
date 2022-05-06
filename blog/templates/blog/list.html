@@ -3,17 +3,21 @@
 {% load i18n %}
 {% get_current_language as CURRENT_LANGUAGE %}
 
-{% load editorjs %}
+{% load custom_editorjs %}
 
 {% block title %}{% translate 'Blog' %}{% endblock %}
 
 {% block body %}
+{#    {% for post in object_list %}#}
+{#        {{ post.name }}#}
+{#        {{ post.description | editorjs }}#}
+{#        {{ post.slug }}#}
+{#        {{ post.author }}#}
+{#        {{ post.categories }}#}
+{#        {{ post.post_date }}#}
+{#    {% endfor %}#}
+
     {% for post in object_list %}
-        {{ post.name }}
-        {{ post.description | editorjs }}
-        {{ post.slug }}
-        {{ post.author }}
-        {{ post.categories }}
-        {{ post.post_date }}
+        <a href="{{ post.slug }}">{{ post.name }}</a>
     {% endfor %}
 {% endblock %}

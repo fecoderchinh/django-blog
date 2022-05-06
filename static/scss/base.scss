@@ -1,3 +1,32 @@
 @import 'reset';
 @import 'brand';
 @import 'sortable';
+
+.cdxcarousel {
+  &-block {
+    width: 20% !important;
+  }
+  &-item {
+    height: auto !important;
+    img {
+      height: 125px !important;
+    }
+  }
+  &-addImage {
+    height: 123px !important;
+    margin: 5px !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    &:hover, &:focus {
+      border-radius: 3px !important;
+    }
+  }
+  &-leftBtn, &-rightBtn {
+    width: 10px !important;
+    height: 10px !important;
+  }
+  &-removeBtn {
+    width: 20px !important;
+    height: 20px !important;
+  }
+}

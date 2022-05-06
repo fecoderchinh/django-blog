@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% get_current_language as CURRENT_LANGUAGE %}
+
+{% load custom_editorjs %}
+
+{% block title %}{{ object.name }}{% endblock %}
+
+{% block body %}
+
+    <h1>{{ object.name }}</h1>
+    <h3>{{ object.author }}</h3>
+    <p>{{ object.categories }}</p>
+    <p>{{ object.post_date }}</p>
+
+    {{ object.description | editorjs }}
+
+{% endblock %}
+
+{% block css %}
+    {{ object.description | include_css }}
+{% endblock %}
+
+{% block js %}
+    {{ object.description | include_js }}
+{% endblock %}
