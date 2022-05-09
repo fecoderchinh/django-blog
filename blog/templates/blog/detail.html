@@ -9,12 +9,28 @@
 
 {% block body %}
 
-    <h1>{{ object.name }}</h1>
-    <h3>{{ object.author }}</h3>
-    <p>{{ object.categories }}</p>
-    <p>{{ object.post_date }}</p>
-
-    {{ object.description | editorjs }}
+    <section class="blog-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <article>
+                        <h1>{{ object.name }}</h1>
+                        <ul class="list-inline">
+                          <li class="list-inline-item">{{ object.author }}</li>
+                          <li class="list-inline-item">{% check_category object.categories %}</li>
+                          <li class="list-inline-item">{{ object.post_date }}</li>
+                        </ul>
+                    </article>
+                    <article class="blocks">
+                        {{ object.description | editorjs }}
+                    </article>
+                </div>
+                <div class="col-12 col-md-4">
+                    sidebar
+                </div>
+            </div>
+        </div>
+    </section>
 
 {% endblock %}
 

@@ -2,6 +2,7 @@ import json
 
 from django import template
 from django.utils.safestring import mark_safe
+from django.utils.translation import gettext_lazy as _
 
 register = template.Library()
 
@@ -144,7 +145,6 @@ def generate_carousel(data, block_id):
     _columns = columns(int(rows['countItemEachRow']))
 
     if rows['config'] == 'carousel':
-        items += f'<div class=container>'
         items += f'<div class=row>'
         items += f'<div class="col-12">'
         items += f'<article class="gallery text-center swiper">'
@@ -162,9 +162,7 @@ def generate_carousel(data, block_id):
         items += f'</article>'
         items += f'</div>'
         items += f'</div>'
-        items += f'</div>'
     elif rows['config'] == 'masonry':
-        items += f'<div class=container>'
         items += f'<div class=row>'
         items += f'<div class=col-12>'
         items += f'<div id=data-' + block_id + '>'
@@ -174,16 +172,13 @@ def generate_carousel(data, block_id):
         items += f'</div>'
         items += f'</div>'
         items += f'</div>'
-        items += f'</div>'
     else:
-        items += f'<div class=container data-col='+rows['countItemEachRow']+'>'
         items += f'<div class=row>'
         for row in rows['items']:
             items += f'<div class="col-6 col-sm-6 ' + _columns + '">'
             items += '<figure><img class=img-fluid src=' + row[
-                         'url'] + '/><figurecaption>' + row['caption'] + '</figurecaption></figure>'
+                'url'] + '/><figurecaption>' + row['caption'] + '</figurecaption></figure>'
             items += f'</div>'
-        items += f'</div>'
         items += f'</div>'
 
     return items
@@ -387,3 +382,11 @@ def include_css(value):
             html_list.append(include_carousel_stylesheets(data))
 
     return mark_safe(''.join(html_list))
+
+
+@register.simple_tag
+def check_category(value):
+    if str(value) == 'blog.Category.None':
+        return _('Uncategorized')
+    else:
+        return False
