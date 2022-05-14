@@ -78,6 +78,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'blog.context_processors.load_settings',
             ],
         },
     },
@@ -198,7 +199,7 @@ EDITORJS_DEFAULT_PLUGINS = (
     '@editorjs/link',
     '@editorjs/marker',
     '@editorjs/table',
-    '@vtchinh/gallery-editorjs@1.1.5', # forked from mr8bit/carousel-editorjs
+    '@vtchinh/gallery-editorjs@1.2.0', # forked from mr8bit/carousel-editorjs
 )
 
 EDITORJS_DEFAULT_CONFIG_TOOLS = {
@@ -248,7 +249,8 @@ EDITORJS_DEFAULT_CONFIG_TOOLS = {
         'config': {
             "endpoints": {
                 "byFile": reverse_lazy('editorjs_image_upload'),
-                "byUrl": reverse_lazy('editorjs_image_by_url')
+                "byUrl": reverse_lazy('editorjs_image_by_url'),
+                "removeImage": reverse_lazy('main:image_remove'),
             }
         },
     }

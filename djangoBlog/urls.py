@@ -20,11 +20,12 @@ from django.conf.urls.i18n import i18n_patterns
 from django.conf import settings
 from django.conf.urls.static import static
 
+import blog.views
+
 urlpatterns = i18n_patterns(
     path('dashboard/', admin.site.urls),
     path('', include('blog.urls')),
 
-    path(r'ua/', include("django.contrib.auth.urls")),
     path(r'ua/', include("django.contrib.auth.urls")),
     path(r'favicon\.ico', RedirectView.as_view(url='/static/favicon/favicon-16.png')),
     path(r'rosetta/', include('rosetta.urls')),

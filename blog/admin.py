@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django import forms
+from django.db.utils import ProgrammingError
 from .models import (
     Category,
     Post,
@@ -9,6 +10,7 @@ from .models import (
     CustomImage,
     Menu,
     MenuItem,
+    SiteSettings,
 )
 
 from parler.admin import TranslatableAdmin
@@ -42,7 +44,12 @@ class PostAdmin(TranslatableAdmin):
     inlines = [PostCommentsInline]
 
     def save_model(self, request, obj, form, change):
-        obj.author = PostAuthor.objects.get(user=request.user)
+        if PostAuthor.objects.filter(user=request.user).exists():
+            obj.author = PostAuthor.objects.get(user=request.user)
+        else:
+            PostAuthor.objects.create(user=request.user).save()
+            obj.author = PostAuthor.objects.get(user=request.user)
+
         super().save_model(request, obj, form, change)
 
 
@@ -56,7 +63,7 @@ class MenuForm(forms.ModelForm):
             '/static/js/menu-sort-stack-inline.js',
         )
         css = {
-            'all': ('https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css', )
+            'all': ('https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css',)
         }
 
 
@@ -69,3 +76,26 @@ admin.site.register(Menu,
                     inlines=[MenuItemInline],
                     form=MenuForm,
                     )
+
+
+class SiteSettingsAdmin(admin.ModelAdmin):
+    # Create a default object on the first page of SiteSettingsAdmin with a list of settings
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
+        # be sure to wrap the loading and saving SiteSettings in a try catch,
+        # so that you can create database migrations
+        try:
+            SiteSettings.load().save()
+        except ProgrammingError:
+            pass
+
+    # prohibit adding new settings
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    # as well as deleting existing
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+admin.site.register(SiteSettings, SiteSettingsAdmin)

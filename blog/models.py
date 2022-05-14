@@ -11,6 +11,8 @@ from parler.models import TranslatableModel, TranslatedFields
 
 from django_editorjs_fields import EditorJsJSONField
 
+from .singleton_model import SingletonModel
+
 
 class PostAuthor(models.Model):
     """
@@ -74,22 +76,22 @@ class Post(TranslatableModel):
         name=models.CharField(max_length=200),
         # description=models.TextField(max_length=2000, help_text=_("Enter your post content text here.")),
         description=EditorJsJSONField(readOnly=False, autofocus=True,
-            i18n={
-                'messages': {
-                    'blockTunes': {
-                        "delete": {
-                            "Delete": _('Delete')
-                        },
-                        "moveUp": {
-                            "Move up": _('Move up')
-                        },
-                        "moveDown": {
-                            "Move down": _('Move down')
-                        }
-                    }
-                },
-            },
-        ),
+                                      i18n={
+                                          'messages': {
+                                              'blockTunes': {
+                                                  "delete": {
+                                                      "Delete": _('Delete')
+                                                  },
+                                                  "moveUp": {
+                                                      "Move up": _('Move up')
+                                                  },
+                                                  "moveDown": {
+                                                      "Move down": _('Move down')
+                                                  }
+                                              }
+                                          },
+                                      },
+                                      ),
     )
     slug = models.SlugField(max_length=40, unique=True)
     author = models.ForeignKey(PostAuthor, on_delete=models.SET_NULL, null=True)
@@ -240,7 +242,6 @@ class MenuItem(models.Model):
     def save(self):
         p_list = self._recurse_for_parents(self)
         if self.name in p_list:
-
             raise validators.ValidationError("You must not save a category in itself!")
         super(MenuItem, self).save()
 
@@ -252,3 +253,11 @@ class MenuItem(models.Model):
         db_table = 'menu_item'
         verbose_name = _('Item')
         verbose_name_plural = _('Items')
+
+
+class SiteSettings(SingletonModel):
+    site_url = models.URLField(verbose_name=_('Website url'), max_length=256)
+    title = models.CharField(verbose_name=_('Title'), max_length=256)
+
+    def __str__(self):
+        return 'Configuration'
