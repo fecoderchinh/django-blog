@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django import forms
+from django.db.models import fields
 from django.db.utils import ProgrammingError
 from .models import (
     Category,
@@ -11,6 +12,7 @@ from .models import (
     Menu,
     MenuItem,
     SiteSettings,
+    Gallery,
 )
 
 from parler.admin import TranslatableAdmin
@@ -76,6 +78,26 @@ admin.site.register(Menu,
                     inlines=[MenuItemInline],
                     form=MenuForm,
                     )
+
+# admin.site.register(Gallery)
+@admin.register(Gallery)
+class GalleryAdmin(admin.ModelAdmin):
+    change_list_template = 'custom_templates/change_list.html'
+    list_display = ['image_tag']
+
+    class Media:
+        js = (
+            '/static/js/gallery-actions.js',
+        )
+        css = {
+            'all': ('/static/css/gallery-admin.css',)
+        }
+
+    # def change_view(self, request, object_id, form_url="", extra_context=None):
+    #     extra_context = extra_context or {}
+    #     return super(GalleryAdmin, self).change_view(
+    #         request, object_id, form_url, extra_context=extra_context,
+    #     )
 
 
 class SiteSettingsAdmin(admin.ModelAdmin):

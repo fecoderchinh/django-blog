@@ -183,6 +183,8 @@ STATICFILES_DIRS = [
 
 EDITORJS_VERSION = '2.22.3'
 
+EDITORJS_IMAGE_NAME_ORIGINAL = False
+
 EDITORJS_DEFAULT_PLUGINS = (
     'editorjs-paragraph-with-alignment@3.x',
     '@editorjs/image',
@@ -248,7 +250,7 @@ EDITORJS_DEFAULT_CONFIG_TOOLS = {
         'inlineToolbar': True,
         'config': {
             "endpoints": {
-                "byFile": reverse_lazy('editorjs_image_upload'),
+                "byFile": reverse_lazy('main:image_upload'),
                 "byUrl": reverse_lazy('editorjs_image_by_url'),
                 "removeImage": reverse_lazy('main:image_remove'),
             }

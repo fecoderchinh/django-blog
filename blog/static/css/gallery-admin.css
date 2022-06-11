@@ -1,0 +1,62 @@
+.action-select {
+  display: none;
+}
+
+.result_list--body {
+  user-select: none;
+}
+
+.result_list--header {
+  padding: 10px;
+}
+
+.result_list--header > div {
+  display: inline-block;
+}
+
+.result_list--header > div > div {
+  display: inline-block;
+}
+
+.result_list--header > div .column-image_tag {
+  cursor: pointer;
+  user-select: none;
+}
+
+.gallery-item {
+  padding: 10px;
+}
+
+.gallery-item > a {
+  display: block;
+  width: 150px;
+  height: 150px;
+  position: relative;
+}
+
+.gallery-item > a > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-item--check {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 30px;
+  height: 30px;
+  background: white;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  color: blue;
+}
+
+.gallery-item--check svg {
+  display: none;
+}
+
+.gallery-item.selected svg {
+  display: block;
+}

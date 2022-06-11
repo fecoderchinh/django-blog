@@ -1,9 +1,14 @@
+import os
 from datetime import date
 
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
+from django.db.models.signals import post_delete
+from django.dispatch.dispatcher import receiver
 
 from django.core import validators
 
@@ -170,6 +175,32 @@ class CustomText(models.Model):
         db_table = 'site_description'
         verbose_name = _('Description')
         verbose_name_plural = _('Descriptions')
+
+
+class Gallery(models.Model):
+    STOCK_IMAGE_DIR = os.path.join(settings.MEDIA_ROOT, 'uploads/images')
+    name = models.TextField(blank=True)
+    path = models.ImageField(upload_to=STOCK_IMAGE_DIR)
+
+    class Meta:
+        db_table = 'gallery'
+        verbose_name = _('Image')
+        verbose_name_plural = _('Images')
+
+    def image_tag(self):
+        return mark_safe('<span class=gallery-item--check><svg xmlns="http://www.w3.org/2000/svg" width="30" '
+                         'height="30" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16"> <path d="M10.97 '
+                         '4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 '
+                         '1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/></svg></span><img '
+                         'src="/media/%s" />' % self.path)
+
+    image_tag.short_description = _('Toggle check all items')
+
+
+@receiver(post_delete, sender=Gallery)
+def image_delete(sender, instance, **kwargs):
+    # Pass false so ImageField doesn't save the model.
+    instance.path.delete(False)
 
 
 class CustomImage(models.Model):
