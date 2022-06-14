@@ -18,7 +18,6 @@ from django.utils.translation import gettext_lazy as _
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -29,7 +28,6 @@ SECRET_KEY = 'django-insecure-l7h#s5lbnicgj88l-r373yi*-u^s1xbevnu)%65o74%6$8g1-f
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -86,7 +84,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'djangoBlog.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -100,7 +97,6 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -120,7 +116,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -131,7 +126,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -201,13 +195,13 @@ EDITORJS_DEFAULT_PLUGINS = (
     '@editorjs/link',
     '@editorjs/marker',
     '@editorjs/table',
-    '@vtchinh/gallery-editorjs@1.2.0', # forked from mr8bit/carousel-editorjs
+    '@vtchinh/gallery-editorjs@1.2.2',
 )
 
 EDITORJS_DEFAULT_CONFIG_TOOLS = {
     'paragraph': {
-      'class': 'Paragraph',
-      'inlineToolbar': True,
+        'class': 'Paragraph',
+        'inlineToolbar': True,
     },
     'Image': {
         'class': 'ImageTool',
@@ -253,7 +247,9 @@ EDITORJS_DEFAULT_CONFIG_TOOLS = {
                 "byFile": reverse_lazy('main:image_upload'),
                 "byUrl": reverse_lazy('editorjs_image_by_url'),
                 "removeImage": reverse_lazy('main:image_remove'),
-            }
+            },
+            # "additionalRequestData": {'image': 'aaa', 'haha': 'bbb', 'bbb': 'ccc'},  # for custom data
+            # 'galleryCallback': 'galleryCallbackFunction'
         },
     }
 }
