@@ -4,7 +4,8 @@ jQuery(function($) {
         $(this).attr('href', 'javascript:void(0)');
     })
 
-    $('.addlink').attr('href', 'javascript:void(0)');
+    // $('.object-tools .addlink').attr('data-change', $('.object-tools .addlink').attr('href'))
+    $('.object-tools .addlink').attr('href', 'javascript:void(0)');
     $('.addlink ').click(function () {
 
     $header = $(this);

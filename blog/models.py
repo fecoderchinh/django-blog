@@ -18,6 +18,8 @@ from django_editorjs_fields import EditorJsJSONField
 
 from .singleton_model import SingletonModel
 
+STOCK_IMAGE_DIR = os.path.join(settings.MEDIA_ROOT, 'uploads/images')
+
 
 class PostAuthor(models.Model):
     """
@@ -165,20 +167,7 @@ class PostComment(models.Model):
         return title_string
 
 
-class CustomText(models.Model):
-    name = models.SlugField()
-    plain_text = models.TextField("Plain/Markdown Text", blank=True)
-    html_text = models.TextField("HTML Text", blank=True)
-    auto_render = models.BooleanField("Render to HTML using Markdown (on save)", default=True)
-
-    class Meta:
-        db_table = 'site_description'
-        verbose_name = _('Description')
-        verbose_name_plural = _('Descriptions')
-
-
 class Gallery(models.Model):
-    STOCK_IMAGE_DIR = os.path.join(settings.MEDIA_ROOT, 'uploads/images')
     name = models.TextField(blank=True)
     path = models.ImageField(upload_to=STOCK_IMAGE_DIR)
 
@@ -201,17 +190,6 @@ class Gallery(models.Model):
 def image_delete(sender, instance, **kwargs):
     # Pass false so ImageField doesn't save the model.
     instance.path.delete(False)
-
-
-class CustomImage(models.Model):
-    name = models.SlugField()
-    description = models.TextField("Description", null=True, blank=True)
-    image = models.ImageField("Custom Image", upload_to="uploads/images/", null=True, blank=True)
-
-    class Meta:
-        db_table = 'site_identity'
-        verbose_name = _('Image')
-        verbose_name_plural = _('Images')
 
 
 class Menu(models.Model):
@@ -287,8 +265,24 @@ class MenuItem(models.Model):
 
 
 class SiteSettings(SingletonModel):
-    site_url = models.URLField(verbose_name=_('Website url'), max_length=256)
+    # site_url = models.URLField(verbose_name=_('Website url'), max_length=256)
     title = models.CharField(verbose_name=_('Title'), max_length=256)
+    description = models.TextField(verbose_name=_('Description'), max_length=256)
+    logo = models.ImageField(upload_to=STOCK_IMAGE_DIR)
+    favicon = models.ImageField(upload_to=STOCK_IMAGE_DIR)
 
     def __str__(self):
         return 'Configuration'
+
+    def save(self, *args, **kwargs):
+        try:
+            this_logo = SiteSettings.objects.get(id=self.id)
+            this_favicon = SiteSettings.objects.get(id=self.id)
+            if this_logo.logo != self.logo:
+                this_logo.logo.delete()
+
+            if this_favicon.favicon != self.favicon:
+                this_favicon.favicon.delete()
+        except:
+            pass
+        super(SiteSettings, self).save(*args, **kwargs)

@@ -7,8 +7,6 @@ from .models import (
     Post,
     PostAuthor,
     PostComment,
-    CustomText,
-    CustomImage,
     Menu,
     MenuItem,
     SiteSettings,
@@ -20,8 +18,6 @@ from parler.admin import TranslatableAdmin
 admin.site.register(Category, TranslatableAdmin)
 admin.site.register(PostAuthor)
 admin.site.register(PostComment)
-admin.site.register(CustomText)
-admin.site.register(CustomImage)
 
 
 class PostCommentsInline(admin.TabularInline):
@@ -79,7 +75,7 @@ admin.site.register(Menu,
                     form=MenuForm,
                     )
 
-# admin.site.register(Gallery)
+
 @admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):
     change_list_template = 'custom_templates/change_list.html'
@@ -93,12 +89,6 @@ class GalleryAdmin(admin.ModelAdmin):
             'all': ('/static/css/gallery-admin.css',)
         }
 
-    # def change_view(self, request, object_id, form_url="", extra_context=None):
-    #     extra_context = extra_context or {}
-    #     return super(GalleryAdmin, self).change_view(
-    #         request, object_id, form_url, extra_context=extra_context,
-    #     )
-
 
 class SiteSettingsAdmin(admin.ModelAdmin):
     # Create a default object on the first page of SiteSettingsAdmin with a list of settings
@@ -110,6 +100,11 @@ class SiteSettingsAdmin(admin.ModelAdmin):
             SiteSettings.load().save()
         except ProgrammingError:
             pass
+
+    class Media:
+        js = (
+            '/static/js/site_setting_actions.js',
+        )
 
     # prohibit adding new settings
     def has_add_permission(self, request, obj=None):
