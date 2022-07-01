@@ -49,3 +49,5 @@ Run `py .\manage.py collectstatic` to collect static files from each of your app
 
 ---
 For more Tutorials, you may also want to visit [This Page](https://github.com/fecoderchinh/django-blog/blob/master/docs/index.md).
+---
+### THE PROJECT IS STILL IN DEVELOPMENT.
