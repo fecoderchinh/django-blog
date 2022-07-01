@@ -46,3 +46,6 @@ INSTALLED_APPS = [
 ```
 
 Run `py .\manage.py collectstatic` to collect static files from each of your applications (and any other places you specify) into a single location that can easily be served in production.
+
+---
+For more Tutorials, you may also want to visit [This Page](https://github.com/fecoderchinh/django-blog/blob/master/docs/index.md).
