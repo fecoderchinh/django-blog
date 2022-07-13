@@ -37,35 +37,35 @@ fieldset.module > h2 {
   height: 100%;
 }
 
-.cdxcarousel-block {
-  width: 20% !important;
-}
+/*.cdxcarousel-block {*/
+/*  width: 20% !important;*/
+/*}*/
 
-.cdxcarousel-item {
-  height: auto !important;
-}
+/*.cdxcarousel-item {*/
+/*  height: auto !important;*/
+/*}*/
 
-.cdxcarousel-item img {
-  height: 125px !important;
-}
+/*.cdxcarousel-item img {*/
+/*  height: 125px !important;*/
+/*}*/
 
-.cdxcarousel-addImage {
-  height: 123px !important;
-  margin: 5px !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-}
+/*.cdxcarousel-addImage {*/
+/*  height: 123px !important;*/
+/*  margin: 5px !important;*/
+/*  padding: 0 !important;*/
+/*  border-radius: 0 !important;*/
+/*}*/
 
-.cdxcarousel-addImage:hover, .cdxcarousel-addImage:focus {
-  border-radius: 3px !important;
-}
+/*.cdxcarousel-addImage:hover, .cdxcarousel-addImage:focus {*/
+/*  border-radius: 3px !important;*/
+/*}*/
 
-.cdxcarousel-leftBtn, .cdxcarousel-rightBtn {
-  width: 10px !important;
-  height: 10px !important;
-}
+/*.cdxcarousel-leftBtn, .cdxcarousel-rightBtn {*/
+/*  width: 10px !important;*/
+/*  height: 10px !important;*/
+/*}*/
 
-.cdxcarousel-removeBtn {
-  width: 20px !important;
-  height: 20px !important;
-}
+/*.cdxcarousel-removeBtn {*/
+/*  width: 20px !important;*/
+/*  height: 20px !important;*/
+/*}*/
